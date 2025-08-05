@@ -1,0 +1,8 @@
+{
+    "type": "gearbox",
+    "material": [
+        "steel"
+    ],
+    "color": "red",
+    "purpose": "automotive"
+}

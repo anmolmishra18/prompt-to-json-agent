@@ -28,11 +28,11 @@ error_log_file_path = "error_log.txt"
 for prompt in prompts:
     try:
         # Generate continuation with sampling
-        # max_new_tokens: The maximum number of tokens to generate.
+        # max_new_tokens: The maximum number of tokens to generate. Increased to 50 for more complete outputs.
         # do_sample: If True, uses sampling; otherwise, uses greedy decoding.
         # temperature: Controls randomness; higher values mean more random outputs (e.g., 0.8 is moderately creative).
         # num_return_sequences: The number of sequences to return. Default is 1.
-        response_list = pipe(prompt, max_new_tokens=80, do_sample=True, temperature=0.8, num_return_sequences=1)
+        response_list = pipe(prompt, max_new_tokens=50, do_sample=True, temperature=0.8, num_return_sequences=1)
         generated_text = response_list[0]["generated_text"]
 
         # Clean response: Replace multiple newlines with a single space and strip leading/trailing whitespace.
