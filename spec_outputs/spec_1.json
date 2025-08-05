@@ -1,8 +1,0 @@
-{
-    "type": "robotic arm",
-    "material": [
-        "aluminum"
-    ],
-    "color": null,
-    "purpose": "factory use"
-}
