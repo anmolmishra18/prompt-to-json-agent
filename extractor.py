@@ -1,53 +1,28 @@
-# extractor.py
-
 def extract_basic_fields(prompt: str) -> dict:
+    prompt = prompt.lower()
     fields = {
         "type": "unknown",
         "material": [],
-        "color": None,
         "dimensions": None,
-        "purpose": None
+        "extras": None
     }
 
-    prompt_lower = prompt.lower()
-
-    # Detect object type
-    if "building" in prompt_lower:
+    if "building" in prompt or "house" in prompt:
         fields["type"] = "building"
-    elif "gearbox" in prompt_lower:
+    elif "gearbox" in prompt:
         fields["type"] = "gearbox"
-    elif "throne" in prompt_lower:
+    elif "throne" in prompt:
         fields["type"] = "throne"
+    elif "drone" in prompt:
+        fields["type"] = "drone"
+    elif "robotic arm" in prompt or "robotic hand" in prompt:
+        fields["type"] = "robotic arm"
+    elif "scene" in prompt:
+        fields["type"] = "scene"
 
-    # Detect material
-    materials = ["glass", "steel", "concrete", "wood", "carbon fiber", "brick"]
+    materials = ["steel", "glass", "wood", "carbon fiber", "aluminum", "brick"]
     for mat in materials:
-        if mat in prompt_lower:
+        if mat in prompt:
             fields["material"].append(mat)
 
-    # Detect color
-    colors = ["red", "blue", "green", "black", "white"]
-    for color in colors:
-        if color in prompt_lower:
-            fields["color"] = color
-
-    # Detect purpose
-    if "fantasy game" in prompt_lower:
-        fields["purpose"] = "fantasy game"
-    elif "automotive" in prompt_lower:
-        fields["purpose"] = "automotive"
-
     return fields
-
-
-if __name__ == "__main__":
-    prompts = [
-        "Design a 2-floor building using glass and concrete.",
-        "Create a red gearbox with steel gears.",
-        "Model a medieval throne for a fantasy game."
-    ]
-
-    for i, prompt in enumerate(prompts):
-        result = extract_basic_fields(prompt)
-        print(f"\nPrompt {i+1}: {prompt}")
-        print("Extracted:", result)

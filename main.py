@@ -1,78 +1,57 @@
-# main.py
-
 from transformers import pipeline
+from extractor import extract_basic_fields
 from schema import DesignSpec
 from logger import log_prompt
-import os
 import json
+import os
 
-# ✅ Ensure output directory exists
+# Load LLM pipeline
+pipe = pipeline("text-generation", model="gpt2")
+
+# Ensure output folder exists
 os.makedirs("spec_outputs", exist_ok=True)
 
-# ✅ Sample prompts to run through the system
-prompts = [
-    "Design a robotic arm for factory use using aluminum.",
-    "Create a red gearbox with steel gears.",
-    "Model a medieval throne for a fantasy game.",
-    "Create a stealth drone for surveillance using carbon fiber.",
-    "Design a waterproof smartwatch using titanium."
-]
+def main():
+    print("\n🤖 Prompt-to-JSON AI Agent")
+    prompt = input("🔸 Enter your design prompt: ")
 
-# ✅ Text generation pipeline (offline model)
-pipe = pipeline("text-generation", model="distilgpt2")
+    # Step 1: Extract structured fields
+    extracted = extract_basic_fields(prompt)
 
-# ✅ Naive extractor (manual pattern matching — replace with real parser later)
-def extract_spec(text):
-    spec = {}
-    text = text.lower()
-
-    # Type
-    for t in ["arm", "gearbox", "throne", "drone", "watch", "smartwatch"]:
-        if t in text:
-            spec["type"] = t
-            break
-
-    # Material
-    materials = []
-    for m in ["aluminum", "steel", "wood", "carbon fiber", "titanium"]:
-        if m in text:
-            materials.append(m)
-    if materials:
-        spec["material"] = materials
-
-    # Color
-    for c in ["red", "blue", "black", "silver"]:
-        if c in text:
-            spec["color"] = c
-            break
-
-    # Purpose
-    for p in ["factory", "automotive", "fantasy", "surveillance", "waterproof"]:
-        if p in text:
-            spec["purpose"] = p + " use" if p == "factory" else p
-            break
-
-    return spec
-
-# ✅ Main processing loop
-for idx, prompt in enumerate(prompts, 1):
-    print(f"\n🔵 Prompt {idx}: {prompt}")
-    response = pipe(prompt, max_length=100)[0]["generated_text"]
-    print(f"🟢 Response: {response}")
-
-    # 🔁 Log prompt + output
-    log_prompt(prompt, response)
-
-    # 🧠 Extract structured data
-    extracted = extract_spec(response)
-    print(f"🧩 Extracted: {extracted}")
-
+    # Step 2: Validate with Pydantic v2
     try:
-        # ✅ Validate structure
         spec = DesignSpec(**extracted)
-        filename = f"spec_outputs/spec_{idx}.json"
-        with open(filename, "w") as f:
-            f.write(spec.json(indent=4))
-        print(f"✅ Saved structured spec to {filename}")
+        json_output = spec.model_dump_json(indent=4)
     except Exception as e:
-        print(f"❌ Validation failed: {e}")
+        print("❌ Schema validation failed:", e)
+        return
+
+    # Step 3: Save JSON file
+    file_id = extracted["type"].replace(" ", "_")
+    filename = f"spec_outputs/{file_id}.json"
+    with open(filename, "w") as f:
+        f.write(json_output)
+
+    # Step 4: Generate LLM response
+    full_output = pipe(prompt, max_length=60)[0]["generated_text"]
+
+    # Step 5: Clean LLM response
+    if full_output.startswith(prompt):
+        llm_generated_part = full_output[len(prompt):].strip()
+    else:
+        llm_generated_part = full_output.strip()
+
+    if not llm_generated_part:
+        llm_generated_part = full_output.strip()
+
+    # Step 6: Log the result
+    log_prompt(prompt, llm_generated_part)
+
+    # Step 7: Display output
+    print("\n✅ JSON Output:")
+    print(json_output)
+    print(f"\n📁 Saved to: {filename}")
+    print("📝 Logged in: logs.json")
+
+if __name__ == "__main__":
+    main()
