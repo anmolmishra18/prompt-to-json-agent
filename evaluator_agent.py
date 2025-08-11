@@ -2,7 +2,7 @@
 """
 evaluator_agent.py
 Simple evaluator/critic agent (stub). It inspects the spec and returns a critique.
-Replace the stub with a real LLM call as needed.
+No saving happens here — main_agent or other scripts will handle saving.
 """
 import os
 import sys
@@ -70,14 +70,4 @@ def evaluate_spec(prompt: str, spec: dict) -> dict:
         "raw_issues": issues,
         "timestamp": datetime.now().isoformat()
     }
-    # Save evaluation file
-    save_evaluation(eval_obj)
-    return eval_obj
-
-if __name__ == "__main__":
-    # quick local test
-    sample_prompt = "Design a small eco-friendly 2-floor library"
-    from main_agent import generate_spec_from_prompt
-    s = generate_spec_from_prompt(sample_prompt)
-    r = evaluate_spec(sample_prompt, s)
-    print(json.dumps(r, indent=2))
+    return eval_obj  # No saving here!
