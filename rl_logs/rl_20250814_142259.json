@@ -1,0 +1,152 @@
+{
+  "prompt": "design a 2 floor building using glass",
+  "episode": [
+    {
+      "step": 1,
+      "spec_snapshot": {
+        "prompt": "design a 2 floor building using glass",
+        "generated_by": "stub_generator",
+        "created_at": "2025-08-14T14:22:59.437926",
+        "type": "building",
+        "floors": 2,
+        "dimensions_m": {
+          "per_floor": {
+            "length": 12.0
+          }
+        },
+        "materials": [
+          "bamboo",
+          "unobtainium"
+        ],
+        "rooms": [
+          {
+            "name": "reading_hall",
+            "area_m2": 50
+          },
+          {
+            "name": "stacks",
+            "area_m2": 20
+          }
+        ],
+        "notes": "Machine-generated with intentional flaws so RL loop can demonstrate fixes."
+      },
+      "evaluation": {
+        "prompt": "design a 2 floor building using glass",
+        "spec_summary": {
+          "type": "building",
+          "has_dimensions": true,
+          "materials": [
+            "bamboo",
+            "unobtainium"
+          ]
+        },
+        "critic_feedback": "Incomplete or missing per-floor dimensions (length/width/height). | Unrecognized or unusual materials: ['unobtainium']",
+        "raw_issues": [
+          "Incomplete or missing per-floor dimensions (length/width/height).",
+          "Unrecognized or unusual materials: ['unobtainium']"
+        ],
+        "timestamp": "2025-08-14T14:22:59.440617"
+      },
+      "score": {
+        "spec_score": 4.5,
+        "breakdown": {
+          "completeness": 0.0,
+          "material_realism": 0.5,
+          "type_match": 1.0,
+          "format_score": 1.0
+        }
+      },
+      "reward": -1,
+      "timestamp": "2025-08-14T14:22:59.440671"
+    },
+    {
+      "step": 1,
+      "fix_applied_diff": {
+        "materials": {
+          "before": [
+            "bamboo",
+            "unobtainium"
+          ],
+          "after": [
+            "bamboo",
+            "wood"
+          ]
+        },
+        "dimensions_m": {
+          "before": {
+            "per_floor": {
+              "length": 12.0
+            }
+          },
+          "after": {
+            "per_floor": {
+              "length": 10.0,
+              "width": 8.0,
+              "height": 3.0
+            },
+            "total_height": 6.0
+          }
+        }
+      },
+      "timestamp": "2025-08-14T14:22:59.440745"
+    },
+    {
+      "step": 2,
+      "spec_snapshot": {
+        "prompt": "design a 2 floor building using glass",
+        "generated_by": "stub_generator",
+        "created_at": "2025-08-14T14:22:59.437926",
+        "type": "building",
+        "floors": 2,
+        "dimensions_m": {
+          "per_floor": {
+            "length": 10.0,
+            "width": 8.0,
+            "height": 3.0
+          },
+          "total_height": 6.0
+        },
+        "materials": [
+          "bamboo",
+          "wood"
+        ],
+        "rooms": [
+          {
+            "name": "reading_hall",
+            "area_m2": 50
+          },
+          {
+            "name": "stacks",
+            "area_m2": 20
+          }
+        ],
+        "notes": "Machine-generated with intentional flaws so RL loop can demonstrate fixes."
+      },
+      "evaluation": {
+        "prompt": "design a 2 floor building using glass",
+        "spec_summary": {
+          "type": "building",
+          "has_dimensions": true,
+          "materials": [
+            "bamboo",
+            "wood"
+          ]
+        },
+        "critic_feedback": "No major issues found.",
+        "raw_issues": [],
+        "timestamp": "2025-08-14T14:22:59.440755"
+      },
+      "score": {
+        "spec_score": 10.0,
+        "breakdown": {
+          "completeness": 1.0,
+          "material_realism": 1.0,
+          "type_match": 1.0,
+          "format_score": 1.0
+        }
+      },
+      "reward": 1,
+      "timestamp": "2025-08-14T14:22:59.440800"
+    }
+  ]
+}

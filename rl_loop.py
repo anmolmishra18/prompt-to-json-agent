@@ -1,90 +1,102 @@
 #!/usr/bin/env python3
 """
 rl_loop.py
-Simple RL simulation:
- - run_episode(prompt, spec, max_steps)
- - on each negative reward step, apply simple fixes (add missing dims / replace unknown materials)
- - log each step to rl_logs/
+Simple RL-like fixer:
+  - Evaluate + Score
+  - If not good: fix missing dims / replace unknown materials
+  - Log each step (evaluation + fix diff). Log never empty.
+Creates rl_logs/rl_*.json
 """
-import os
-import sys
 import json
+import os
+from copy import deepcopy
 from datetime import datetime
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from evaluator_agent import evaluate_spec, save_evaluation
+from evaluator_agent import evaluate_spec
 from data_scorer import score_spec
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+RL_DIR = os.path.join(ROOT, "rl_logs")
+os.makedirs(RL_DIR, exist_ok=True)
 
-def timestamp():
+def _ts():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
 
-def save_rl_log(obj, tag="rl_episode"):
-    folder = os.path.join(ROOT, "rl_logs")
-    os.makedirs(folder, exist_ok=True)
-    fn = f"{tag}_{timestamp()}.json"
-    path = os.path.join(folder, fn)
+def _save_rl_log(obj):
+    path = os.path.join(RL_DIR, f"rl_{_ts()}.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, indent=2)
     return path
 
-def attempt_fix(spec: dict) -> dict:
-    # Simple deterministic repairs:
-    s = dict(spec)  # shallow copy
+def _shallow_diff(before: dict, after: dict) -> dict:
+    diff = {}
+    keys = set(before.keys()) | set(after.keys())
+    for k in keys:
+        if before.get(k) != after.get(k):
+            diff[k] = {"before": before.get(k), "after": after.get(k)}
+    return diff
+
+def _attempt_fix(spec: dict) -> dict:
+    s = deepcopy(spec)
+
+    # Fix materials
+    known = {"bamboo","wood","steel","concrete","glass","brick","aluminum","recycled_wood","low-e_glass","low-e glass"}
+    if s.get("materials"):
+        s["materials"] = [
+            (m if str(m).lower() in known else ("steel" if s.get("type") != "building" else "wood"))
+            for m in s["materials"]
+        ]
+
+    # Fix dimensions for buildings
     if s.get("type") == "building":
         dims = s.get("dimensions_m")
-        if not dims:
-            s["dimensions_m"] = {"per_floor": {"length": 10.0, "width": 8.0, "height": 3.0}, "total_height": 3.0}
-        else:
-            per_floor = dims.get("per_floor") or {}
-            if not all(k in per_floor for k in ("length", "width", "height")):
-                per_floor.setdefault("length", 10.0)
-                per_floor.setdefault("width", 8.0)
-                per_floor.setdefault("height", 3.0)
-                s["dimensions_m"]["per_floor"] = per_floor
-                s["dimensions_m"]["total_height"] = per_floor["height"] * s.get("floors", 1)
-    # materials fixes: replace unknowns with common known materials
-    mats = s.get("materials", [])
-    if mats:
-        known = {"bamboo", "wood", "steel", "concrete", "glass", "brick", "aluminum", "recycled_wood"}
-        new_mats = []
-        for m in mats:
-            if m.lower() not in known:
-                # replace with a plausible choice
-                new_mats.append("steel" if s.get("type") == "mechanical" else "wood")
-            else:
-                new_mats.append(m)
-        s["materials"] = new_mats
+        per_floor = (dims or {}).get("per_floor") if isinstance(dims, dict) else None
+        if not per_floor or not all(k in per_floor for k in ("length","width","height")):
+            s["dimensions_m"] = {
+                "per_floor": {"length": 10.0, "width": 8.0, "height": 3.0},
+                "total_height": 3.0 * s.get("floors", 1)
+            }
+
     return s
 
 def run_episode(prompt: str, spec: dict, max_steps: int = 3) -> str:
+    print(">>> RL LOOP START for prompt:", prompt)  # DEBUG
+
     logs = []
-    current_spec = dict(spec)
+    current = deepcopy(spec)
+
     for step in range(1, max_steps + 1):
-        eval_res = evaluate_spec(prompt, current_spec)
-        score_res = score_spec(prompt, current_spec)
-        reward = 1 if score_res["spec_score"] >= 7.0 and "no major issues" in eval_res.get("critic_feedback", "").lower() else -1
+        # Evaluate + Score
+        eval_res = evaluate_spec(prompt, current)
+        score_res = score_spec(prompt, current)
+        critic_text = eval_res.get("critic_feedback", "").lower()
+        reward = 1 if (score_res["spec_score"] >= 7.0 and "no major issues" in critic_text) else -1
+
+        # Always log the evaluation step
         logs.append({
             "step": step,
-            "spec": current_spec,
-            "eval": eval_res,
+            "spec_snapshot": deepcopy(current),
+            "evaluation": eval_res,
             "score": score_res,
             "reward": reward,
             "timestamp": datetime.now().isoformat()
         })
+
         if reward == 1:
             break
-        # attempt a fix
-        current_spec = attempt_fix(current_spec)
 
-    rl_path = save_rl_log({"prompt": prompt, "episode": logs})
+        # Apply fix and log diff
+        before = deepcopy(current)
+        current = _attempt_fix(current)
+        diff = _shallow_diff(before, current)
+        logs.append({
+            "step": step,
+            "fix_applied_diff": diff,
+            "timestamp": datetime.now().isoformat()
+        })
+
+    if not logs:  # safety net; should never happen now
+        logs.append({"step": 0, "note": "No steps recorded — forcing non-empty log"})
+
+    rl_path = _save_rl_log({"prompt": prompt, "episode": logs})
     return rl_path
-
-if __name__ == "__main__":
-    # quick run
-    from main_agent import generate_spec_from_prompt
-    p = "Design a small 2-floor eco-friendly library"
-    s = generate_spec_from_prompt(p)
-    path = run_episode(p, s, max_steps=3)
-    print("RL log saved at:", path)

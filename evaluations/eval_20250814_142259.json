@@ -1,0 +1,17 @@
+{
+  "prompt": "design a 2 floor building using glass",
+  "spec_summary": {
+    "type": "building",
+    "has_dimensions": true,
+    "materials": [
+      "bamboo",
+      "unobtainium"
+    ]
+  },
+  "critic_feedback": "Incomplete or missing per-floor dimensions (length/width/height). | Unrecognized or unusual materials: ['unobtainium']",
+  "raw_issues": [
+    "Incomplete or missing per-floor dimensions (length/width/height).",
+    "Unrecognized or unusual materials: ['unobtainium']"
+  ],
+  "timestamp": "2025-08-14T14:22:59.439253"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt": "design a robotics using stell",
+  "generated_by": "stub_generator",
+  "created_at": "2025-08-14T14:23:56.576660",
+  "type": "mechanical",
+  "parts": [
+    {
+      "name": "base",
+      "material": "steel",
+      "dimensions_mm": {
+        "l": 200,
+        "w": 100,
+        "h": 20
+      }
+    },
+    {
+      "name": "shaft",
+      "material": "adamantium",
+      "dimensions_mm": {
+        "l": 150,
+        "dia": 20
+      }
+    }
+  ],
+  "materials": [
+    "steel",
+    "adamantium"
+  ],
+  "notes": "Machine-generated with intentional flaws so RL loop can demonstrate fixes."
+}

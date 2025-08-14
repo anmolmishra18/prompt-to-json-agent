@@ -1,0 +1,16 @@
+{
+  "prompt": "design a robotics using stell",
+  "spec_summary": {
+    "type": "mechanical",
+    "has_dimensions": false,
+    "materials": [
+      "steel",
+      "adamantium"
+    ]
+  },
+  "critic_feedback": "Unrecognized or unusual materials: ['adamantium']",
+  "raw_issues": [
+    "Unrecognized or unusual materials: ['adamantium']"
+  ],
+  "timestamp": "2025-08-14T14:23:56.577987"
+}

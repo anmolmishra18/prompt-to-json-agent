@@ -1,73 +1,66 @@
 #!/usr/bin/env python3
 """
 evaluator_agent.py
-Simple evaluator/critic agent (stub). It inspects the spec and returns a critique.
-No saving happens here — main_agent or other scripts will handle saving.
+Rule-based evaluator that flags:
+ - missing/incomplete building dimensions
+ - unknown materials
+ - prompt/type mismatch
+Returns an evaluation dict. Saving is handled via save_evaluation().
 """
-import os
-import sys
 import json
+import os
 from datetime import datetime
 
-# ensure imports when run from different cwd
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-def timestamp():
+def _ts():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
 
 def save_evaluation(eval_obj, tag="eval"):
     folder = os.path.join(ROOT, "evaluations")
     os.makedirs(folder, exist_ok=True)
-    fn = f"{tag}_{timestamp()}.json"
-    path = os.path.join(folder, fn)
+    path = os.path.join(folder, f"{tag}_{_ts()}.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(eval_obj, f, indent=2)
     return path
 
 def evaluate_spec(prompt: str, spec: dict) -> dict:
-    """
-    Very simple rule-based evaluator that returns critic feedback.
-    """
     issues = []
-    # Check dimensions for buildings
+    prompt_low = prompt.lower()
+
+    # Dimensions check for buildings
     if spec.get("type") == "building":
         dims = spec.get("dimensions_m")
-        if not dims or not isinstance(dims, dict):
-            issues.append("Missing dimensions for building.")
-        else:
-            per_floor = dims.get("per_floor")
-            if not per_floor or not all(k in per_floor for k in ("length", "width", "height")):
-                issues.append("Incomplete per-floor dimensions (length/width/height).")
+        per_floor = (dims or {}).get("per_floor") if isinstance(dims, dict) else None
+        if not per_floor or not all(k in per_floor for k in ("length", "width", "height")):
+            issues.append("Incomplete or missing per-floor dimensions (length/width/height).")
 
-    # Check materials against a small known set
-    known_materials = {"bamboo", "wood", "steel", "concrete", "glass", "brick", "aluminum", "recycled_wood", "low-e_glass", "low-E_glass"}
-    materials = spec.get("materials", [])
-    if materials:
-        unknown = [m for m in materials if m.lower() not in known_materials]
-        if unknown:
-            issues.append(f"Unrecognized or unusual materials: {unknown}")
+    # Materials check
+    known_materials = {
+        "bamboo","wood","steel","concrete","glass","brick","aluminum","recycled_wood","low-e_glass","low-e glass","low-e_glass","low-e_glass".lower()
+    }
+    mats = spec.get("materials", [])
+    unknown = [m for m in mats if str(m).lower() not in known_materials]
+    if unknown:
+        issues.append(f"Unrecognized or unusual materials: {unknown}")
 
-    # Type / prompt mismatch
-    prompt_low = prompt.lower()
-    if any(w in prompt_low for w in ["library", "building", "house"]) and spec.get("type") != "building":
+    # Prompt/type match
+    building_prompt = any(w in prompt_low for w in ["library", "building", "house", "office", "school", "museum", "center"])
+    if building_prompt and spec.get("type") != "building":
         issues.append("Prompt suggests a building but spec type is not 'building'.")
+    if (not building_prompt) and spec.get("type") == "building":
+        issues.append("Prompt does not suggest a building, but spec type is 'building'.")
 
-    # Content clarity checks
-    if len(issues) == 0:
-        feedback = "No major issues found."
-    else:
-        feedback = " | ".join(issues)
+    feedback = "No major issues found." if not issues else " | ".join(issues)
 
-    eval_obj = {
+    return {
         "prompt": prompt,
         "spec_summary": {
             "type": spec.get("type"),
             "has_dimensions": bool(spec.get("dimensions_m")),
-            "materials": spec.get("materials", [])
+            "materials": mats
         },
         "critic_feedback": feedback,
         "raw_issues": issues,
         "timestamp": datetime.now().isoformat()
     }
-    return eval_obj  # No saving here!

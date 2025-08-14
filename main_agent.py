@@ -1,40 +1,44 @@
 #!/usr/bin/env python3
 """
 main_agent.py
-Orchestrator:
- - generates a spec JSON from a prompt (stub or real model)
- - saves to prompt_logs/
- - calls evaluator_agent.evaluate_spec(...)
- - calls data_scorer.score_spec(...)
- - logs RL step via rl_loop (single step or simulate)
+Pipeline:
+  prompt -> generate spec (intentionally flawed) -> evaluate -> score -> optional RL -> merged output
+Creates:
+  - prompt_logs/spec_*.json
+  - evaluations/eval_*.json
+  - rl_logs/rl_*.json (if --simulate)
+  - sample_outputs/single_*.json (merged: spec + eval + score + RL content)
 """
-import os
-import sys
-import json
 import argparse
+import json
+import os
 from datetime import datetime
 import random
 
-# Ensure module imports work when running scripts from different CWDs
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from evaluator_agent import evaluate_spec, save_evaluation  # local module
+from evaluator_agent import evaluate_spec, save_evaluation
 from data_scorer import score_spec
 from rl_loop import run_episode
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-def ensure_dirs():
-    for d in ("prompt_logs", "evaluations", "rl_logs", "sample_outputs"):
-        path = os.path.join(ROOT, d)
-        os.makedirs(path, exist_ok=True)
-
-def timestamp():
+def _ts():  # timestamp string
     return datetime.now().strftime("%Y%m%d_%H%M%S")
 
-def generate_spec_from_prompt(prompt: str, use_stub=True):
+def _ensure_dirs():
+    for d in ("prompt_logs", "evaluations", "rl_logs", "sample_outputs"):
+        os.makedirs(os.path.join(ROOT, d), exist_ok=True)
+
+def _save_json(obj, folder, prefix):
+    path = os.path.join(ROOT, folder, f"{prefix}_{_ts()}.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, indent=2)
+    return path
+
+# ---------- Spec Generator (guarantees at least one flaw) ----------
+def generate_spec_from_prompt(prompt: str) -> dict:
     """
-    Simple stubbed spec generator. Replace with LLM call if desired.
+    Stubbed generator that ALWAYS injects at least one flaw so the RL loop has work.
+    Flaws: missing/incomplete dimensions (for buildings), or unknown materials.
     """
     lower = prompt.lower()
     spec = {
@@ -43,108 +47,86 @@ def generate_spec_from_prompt(prompt: str, use_stub=True):
         "created_at": datetime.now().isoformat(),
     }
 
-    # simple type detection
-    if any(w in lower for w in ["library", "building", "house", "office", "school"]):
+    is_building_prompt = any(w in lower for w in ["library", "building", "house", "office", "school", "museum", "center"])
+    if is_building_prompt:
         spec["type"] = "building"
-        # floors detection
-        if "2-floor" in lower or "2 floor" in lower or "two-floor" in lower:
-            floors = 2
+        spec["floors"] = 2 if any(k in lower for k in ["2-floor", "2 floor", "two-floor", "two floor", "2"]) else 1
+
+        # Guarantee at least one flaw:
+        # (a) 50%: remove dimensions entirely; (b) otherwise: add incomplete dimensions
+        if random.random() < 0.5:
+            # No dimensions at all (flaw)
+            pass
         else:
-            floors = 1 if "single" in lower or "one-floor" in lower else 2 if "two" in lower else 1
-        spec["floors"] = floors
-        # dimensions (stubbed) per floor
-        spec["dimensions_m"] = {
-            "per_floor": {
-                "length": 12.0,
-                "width": 8.0,
-                "height": 3.0
-            },
-            "total_height": floors * 3.0
-        }
-        # room list for a library
+            spec["dimensions_m"] = {"per_floor": {"length": 12.0}}  # incomplete (flaw)
+
+        # Always include one unknown material (flaw)
+        spec["materials"] = ["bamboo", "unobtainium"]
+
+        # Basic content
         spec["rooms"] = [
             {"name": "reading_hall", "area_m2": 50},
-            {"name": "stacks", "area_m2": 20},
-            {"name": "toilet", "area_m2": 6},
-            {"name": "staircase", "area_m2": 8}
+            {"name": "stacks", "area_m2": 20}
         ]
-        # materials
-        if "eco" in lower or "eco-friendly" in lower or "sustainable" in lower:
-            spec["materials"] = ["bamboo", "recycled_wood", "low-E_glass"]
-        else:
-            spec["materials"] = ["concrete", "brick", "glass"]
     else:
-        # fallback mechanical spec
         spec["type"] = "mechanical"
         spec["parts"] = [
             {"name": "base", "material": "steel", "dimensions_mm": {"l": 200, "w": 100, "h": 20}},
-            {"name": "shaft", "material": "steel", "dimensions_mm": {"l": 150, "dia": 20}}
+            {"name": "shaft", "material": "adamantium", "dimensions_mm": {"l": 150, "dia": 20}}  # unknown material (flaw)
         ]
-        spec["materials"] = ["steel", "aluminum"]
+        spec["materials"] = ["steel", "adamantium"]  # unknown material (flaw)
 
-    # add some metadata
-    spec["notes"] = "This spec is machine-generated stub. Replace generator with LLM for richer outputs."
+    spec["notes"] = "Machine-generated with intentional flaws so RL loop can demonstrate fixes."
     return spec
 
-def save_json(obj, folder, prefix):
-    fn = f"{prefix}_{timestamp()}.json"
-    path = os.path.join(ROOT, folder, fn)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2)
-    return path
+def _merge_and_save(prompt, spec, eval_result, score_result, rl_path=None, prefix="single"):
+    merged = {"prompt": prompt, "spec": spec, "evaluation": eval_result, "score": score_result}
+    if rl_path:
+        try:
+            with open(rl_path, "r", encoding="utf-8") as f:
+                merged["rl_log"] = json.load(f)
+        except Exception as e:
+            merged["rl_log"] = {"error": f"Could not load RL log: {e}", "path": rl_path}
+
+    out_path = os.path.join(ROOT, "sample_outputs", f"{prefix}_{_ts()}.json")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(merged, f, indent=2)
+    return out_path
 
 def main():
-    ensure_dirs()
-    parser = argparse.ArgumentParser(description="Prompt -> Spec orchestrator")
+    _ensure_dirs()
+    parser = argparse.ArgumentParser(description="Prompt -> Spec -> Evaluate -> Score -> (optional RL) -> Merge")
     parser.add_argument("--prompt", type=str, help="Prompt text (wrap in quotes)")
-    parser.add_argument("--prompt_file", type=str, help="Read prompt from a file")
-    parser.add_argument("--simulate", action="store_true", help="Run RL episode (attempt fixes) after generation")
+    parser.add_argument("--simulate", action="store_true", help="Run RL improvement loop")
     args = parser.parse_args()
 
-    if not args.prompt and not args.prompt_file:
-        print("Provide --prompt or --prompt_file")
+    prompt = args.prompt.strip() if args.prompt else input("Enter your prompt: ").strip()
+    if not prompt:
+        print("No prompt provided. Exiting.")
         return
 
-    if args.prompt_file:
-        with open(args.prompt_file, "r", encoding="utf-8") as f:
-            prompt = f.read().strip()
-    else:
-        prompt = args.prompt.strip()
+    # Generate flawed spec
+    spec = generate_spec_from_prompt(prompt)
+    spec_path = _save_json(spec, "prompt_logs", "spec")
+    print("Spec saved to:", spec_path)
 
-    print("Prompt:", prompt)
-    spec = generate_spec_from_prompt(prompt, use_stub=True)
-    spec_path = save_json(spec, "prompt_logs", "spec")
-    print("Spec generated and saved to:", spec_path)
-
-    # Evaluate
-    eval_result = evaluate_spec(prompt, spec)  # returns dict with 'critic_feedback' etc.
+    # Evaluate + Score
+    eval_result = evaluate_spec(prompt, spec)
     eval_path = save_evaluation(eval_result, tag="eval")
     print("Evaluation saved to:", eval_path)
 
-    # Score
     score_result = score_spec(prompt, spec)
-    print("Spec scoring result:", score_result)
+    print("Score:", score_result)
 
-    # RL step / simulation
+    # Optional RL loop
+    rl_path = None
     if args.simulate:
-        rl_log_path = run_episode(prompt, spec, max_steps=3)
-        print("RL episode logged to:", rl_log_path)
-    else:
-        # Write a single RL log entry summarizing this attempt
-        # simple reward rule: reward = 1 if no "issues" in eval
-        reward = 1 if "no major issues" in eval_result.get("critic_feedback", "").lower() else -1
-        rl_entry = {
-            "prompt": prompt,
-            "spec_path": spec_path,
-            "eval_path": eval_path,
-            "score": score_result,
-            "critic_feedback": eval_result.get("critic_feedback"),
-            "reward": reward,
-            "timestamp": datetime.now().isoformat()
-        }
-        rl_path = save_json(rl_entry, "rl_logs", "rl")
-        print("RL log (single step) saved to:", rl_path)
-        print("Final reward:", reward)
+        print("DEBUG: RL loop starting for prompt:", prompt)
+        rl_path = run_episode(prompt, spec, max_steps=3)
+        print("DEBUG: RL loop finished:", rl_path)
+
+    merged_path = _merge_and_save(prompt, spec, eval_result, score_result, rl_path, prefix="single")
+    print("Merged output saved to:", merged_path)
 
 if __name__ == "__main__":
     main()
