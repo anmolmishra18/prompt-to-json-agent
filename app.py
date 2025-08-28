@@ -1,27 +1,21 @@
 import streamlit as st
-from main import parse_prompt, refine_spec, run_pipeline
+from main import parse_prompt, run_pipeline
 
-st.set_page_config(page_title="Prompt to JSON Agent", layout="wide")
-st.title("Prompt to JSON Agent (Demo)")
+st.title("Prompt to JSON Agent")
 
-prompt = st.text_area(
-    "Enter your prompt text:",
-    placeholder="Example: Make a call to ambulance it is urgent",
-    height=150
-)
-
-iterations = st.number_input("Feedback iterations", min_value=1, max_value=10, value=3)
+prompt = st.text_area("Enter your prompt:", height=100)
+iterations = st.number_input("Iterations", min_value=1, max_value=10, value=3)
 
 if st.button("Run Agent"):
-    if not prompt.strip():
-        st.error("Please enter a prompt first.")
-    else:
+    if prompt.strip():
         spec = parse_prompt(prompt)
         st.subheader("Parsed JSON")
         st.json(spec)
-
-        final_spec, logs = run_pipeline(spec, iterations=iterations)
-        st.subheader("Final Spec after Feedback Loop")
+        
+        final_spec, history = run_pipeline(spec, iterations)
+        st.subheader("Final Spec")
         st.json(final_spec)
-
-        st.success(f"Reports saved in 'reports/', logs saved in 'logs/'")
+        
+        st.success("Reports saved in 'reports/', logs in 'logs/'")
+    else:
+        st.error("Please enter a prompt")

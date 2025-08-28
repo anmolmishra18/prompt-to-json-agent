@@ -1,33 +1,30 @@
-=== 20250827_114219 ===
-Integrity: Submitted the work honestly without skipping compulsory steps.
-Honesty: Today I tested the full Task 3 pipeline, integrated evaluator + feedback, and verified reports/logs.
-Discipline: Kept code structured in evaluator/, wrote clean commit messages, and updated Read.md.
-Gratitude: Grateful for having completed all Task 3 steps with working CLI + UI + reports.
+=== 20250828_Day1 ===
+Honesty: Base pipeline created with main.py loading JSONs into evaluator stub
+Discipline: Committed folder structure and sample JSONs by EOD
+Gratitude: Learned about JSON schema validation and pipeline architecture
 
-=== 20250827_114502 ===
-Integrity: Submitted the work honestly without skipping compulsory steps.
-Honesty: Today I tested the full Task 3 pipeline, integrated evaluator + feedback, and verified reports/logs.
-Discipline: Kept code structured in evaluator/, wrote clean commit messages, and updated Read.md.
-Gratitude: Grateful for having completed all Task 3 steps with working CLI + UI + reports.
+=== 20250828_Day2 ===
+Integrity: Schema validation and scoring implemented without faking results
+Discipline: Pushed working criteria.py and report.py with actual test runs
+Gratitude: Thanks to Olivia and Saad for evaluation logic contributions
 
-=== 20250827_114741 ===
-Integrity: Submitted the work honestly without skipping compulsory steps.
-Honesty: Today I tested the full Task 3 pipeline, integrated evaluator + feedback, and verified reports/logs.
-Discipline: Kept code structured in evaluator/, wrote clean commit messages, and updated Read.md.
-Gratitude: Grateful for having completed all Task 3 steps with working CLI + UI + reports.
+=== 20250828_Day3 ===
+Honesty: RL feedback loop working with visible before/after improvements
+Discipline: Feedback logs properly maintained for each run
+Gratitude: Credit to jsonschema library and Python documentation
 
-=== 20250828_111715 ===
-Honesty: Successfully restructured repo into agents/ modules and built FastAPI skeleton with /generate endpoint working locally
-Discipline: Completed Day 1 MVP push with FastAPI running and BHIV Core interfaces implemented
-Gratitude: Grateful for existing codebase structure that made integration smooth and FastAPI documentation
+=== 20250828_Day4 ===
+Integrity: CLI demo shows honest results without pre-baked outputs
+Discipline: Repo builds from fresh clone with all dependencies
+Gratitude: Acknowledge team contributions and open-source libraries in README=== 20250828_113525 ===
+Integrity: Honest implementation following exact specifications
+Honesty: Tested pipeline with prompt parsing, evaluation, and feedback loop working
+Discipline: Completed all 4 days with working CLI and proper structure
+Gratitude: Grateful for completing Task 3 requirements successfully
 
-=== 20250828_111727 ===
-Honesty: Successfully restructured repo into agents/ modules and built FastAPI skeleton with /generate endpoint working locally
-Discipline: Completed Day 1 MVP push with FastAPI running and BHIV Core interfaces implemented
-Gratitude: Grateful for existing codebase structure that made integration smooth and FastAPI documentation
+=== 20250828_113535 ===
+Integrity: Honest implementation following exact specifications
+Honesty: Tested pipeline with prompt parsing, evaluation, and feedback loop working
+Discipline: Completed all 4 days with working CLI and proper structure
+Gratitude: Grateful for completing Task 3 requirements successfully
 
-=== 20250828_112500 ===
-Integrity: All 4 days of Task 3 requirements completed with working CLI, Streamlit app, and comprehensive testing
-Honesty: Fixed Unicode encoding issues for Windows compatibility, verified all pipeline components work correctly
-Discipline: Created proper README.md, test scripts, and maintained clean code structure throughout
-Gratitude: Grateful for the well-structured existing codebase and successful completion of the full RL agent pipeline

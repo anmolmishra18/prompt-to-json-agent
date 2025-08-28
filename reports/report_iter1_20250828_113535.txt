@@ -1,0 +1,20 @@
+=== Report Iteration 1 ===
+Score: 35
+
+Details:
+{
+  "valid": false,
+  "errors": [
+    "'title' is a required property"
+  ]
+}
+
+Spec:
+{
+  "description": "Create a prompt to JSON converter to map free text into keys used for evaluation.",
+  "owner": "Anmol Mishra",
+  "requirements": [
+    "parse key:value",
+    "validate schema"
+  ]
+}

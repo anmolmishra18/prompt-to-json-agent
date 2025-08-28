@@ -1,0 +1,17 @@
+{
+  "spec": {
+    "priority": "medium",
+    "description": "Create a student management system",
+    "title": "Create a student management sy",
+    "requirements": [
+      "basic validation",
+      "report generation"
+    ]
+  },
+  "score": 65,
+  "details": {
+    "valid": true,
+    "errors": []
+  },
+  "iteration": 1
+}

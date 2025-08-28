@@ -1,0 +1,19 @@
+=== Report Iteration 1 ===
+Score: 65
+
+Details:
+{
+  "valid": true,
+  "errors": []
+}
+
+Spec:
+{
+  "priority": "medium",
+  "description": "Create a student management system",
+  "title": "Create a student management sy",
+  "requirements": [
+    "basic validation",
+    "report generation"
+  ]
+}
