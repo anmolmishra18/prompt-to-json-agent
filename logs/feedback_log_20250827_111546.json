@@ -1,0 +1,38 @@
+[
+    {
+        "iteration": 1,
+        "spec": {
+            "description": "Make a chatbot for exam queries",
+            "priority": "medium",
+            "title": "Make a chatbot for exam querie",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "spec_before": {
+            "description": "Make a chatbot for exam queries",
+            "priority": "medium",
+            "title": "Make a chatbot for exam querie",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "score": 65,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "suggestions": [],
+        "new_score": 65,
+        "new_details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "report_json": "reports\\report_iter1_20250827_111546.json",
+        "report_txt": "reports\\report_iter1_20250827_111546.txt"
+    }
+]

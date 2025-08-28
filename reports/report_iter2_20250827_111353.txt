@@ -1,0 +1,17 @@
+Report generated at: 20250827_111353
+Score: 40
+Priority: medium
+
+Details:
+- valid: False
+- errors: ["'login, dashboard, reports' is not of type 'array'"]
+- priority: medium
+
+Spec:
+{
+  "title": "Student Portal",
+  "description": "Manage courses and grades\n\nPlease add more details about goal, input and expected output.",
+  "owner": "Anmol",
+  "requirements": "login, dashboard, reports",
+  "priority": "medium"
+}

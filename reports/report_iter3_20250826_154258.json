@@ -1,0 +1,10 @@
+{
+    "description": "Organize old files in the archive folder; it\u2019s optional and can be done later.",
+    "priority": "low",
+    "title": "Organize Old Files In The Arch",
+    "requirements": [
+        "minimal validation"
+    ],
+    "owner": "Anmol Mishra",
+    "finalized": true
+}

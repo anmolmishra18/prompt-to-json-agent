@@ -1,0 +1,47 @@
+[
+    {
+        "iteration": 1,
+        "score": 65,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "\"Make a chatbot for exam queries\" \n",
+            "title": "\"Make a chatbot for exam queri",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "suggestions": [
+            {
+                "field": "owner",
+                "action": "add",
+                "value": "Unknown"
+            }
+        ]
+    },
+    {
+        "iteration": 2,
+        "score": 75,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "\"Make a chatbot for exam queries\" \n",
+            "title": "\"Make a chatbot for exam queri",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ],
+            "owner": "Unknown"
+        },
+        "suggestions": []
+    }
+]

@@ -1,0 +1,47 @@
+[
+    {
+        "iteration": 1,
+        "spec": {
+            "description": "Design a new login page for the web application.",
+            "priority": "medium",
+            "title": "Design a new login page for th",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "report_json": "reports\\report_iter1_20250826_154324.json",
+        "report_txt": "reports\\report_iter1_20250826_154324.txt"
+    },
+    {
+        "iteration": 2,
+        "spec": {
+            "description": "Design a new login page for the web application.",
+            "priority": "medium",
+            "title": "Design A New Login Page For Th",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ],
+            "owner": "Anmol Mishra"
+        },
+        "report_json": "reports\\report_iter2_20250826_154324.json",
+        "report_txt": "reports\\report_iter2_20250826_154324.txt"
+    },
+    {
+        "iteration": 3,
+        "spec": {
+            "description": "Design a new login page for the web application.",
+            "priority": "medium",
+            "title": "Design A New Login Page For Th",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ],
+            "owner": "Anmol Mishra",
+            "finalized": true
+        },
+        "report_json": "reports\\report_iter3_20250826_154324.json",
+        "report_txt": "reports\\report_iter3_20250826_154324.txt"
+    }
+]

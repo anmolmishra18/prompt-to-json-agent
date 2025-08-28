@@ -1,0 +1,20 @@
+=== Report Iteration 1 ===
+Score: 75
+
+Details:
+{
+    "valid": true,
+    "errors": [],
+    "priority": "medium"
+}
+
+Spec:
+{
+    "priority": "medium",
+    "description": "Create an emergency response system for hospitals with real-time alerts",
+    "title": "Create an emergency response s",
+    "requirements": [
+        "basic validation",
+        "report generation"
+    ]
+}

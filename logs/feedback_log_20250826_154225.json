@@ -1,0 +1,50 @@
+[
+    {
+        "iteration": 1,
+        "spec": {
+            "description": "Server is down! Resolve the emergency issue ASAP.",
+            "priority": "high",
+            "title": "Server is down! Resolve the em",
+            "requirements": [
+                "schema validation",
+                "error handling",
+                "report generation"
+            ]
+        },
+        "report_json": "reports\\report_iter1_20250826_154225.json",
+        "report_txt": "reports\\report_iter1_20250826_154225.txt"
+    },
+    {
+        "iteration": 2,
+        "spec": {
+            "description": "Server is down! Resolve the emergency issue ASAP.",
+            "priority": "high",
+            "title": "Server Is Down! Resolve The Em",
+            "requirements": [
+                "schema validation",
+                "error handling",
+                "report generation"
+            ],
+            "owner": "Anmol Mishra"
+        },
+        "report_json": "reports\\report_iter2_20250826_154225.json",
+        "report_txt": "reports\\report_iter2_20250826_154225.txt"
+    },
+    {
+        "iteration": 3,
+        "spec": {
+            "description": "Server is down! Resolve the emergency issue ASAP.",
+            "priority": "high",
+            "title": "Server Is Down! Resolve The Em",
+            "requirements": [
+                "error handling",
+                "report generation",
+                "schema validation"
+            ],
+            "owner": "Anmol Mishra",
+            "finalized": true
+        },
+        "report_json": "reports\\report_iter3_20250826_154225.json",
+        "report_txt": "reports\\report_iter3_20250826_154225.txt"
+    }
+]

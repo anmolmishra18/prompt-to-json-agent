@@ -1,0 +1,18 @@
+{
+    "spec": {
+        "priority": "medium",
+        "description": "Create a student management system for tracking grades and attendance",
+        "title": "Create a student management sy",
+        "requirements": [
+            "basic validation",
+            "report generation"
+        ]
+    },
+    "score": 75,
+    "details": {
+        "valid": true,
+        "errors": [],
+        "priority": "medium"
+    },
+    "iteration": 1
+}

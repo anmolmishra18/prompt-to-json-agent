@@ -1,0 +1,19 @@
+{
+    "spec": {
+        "description": "Create a prompt to JSON converter to map free text into keys used for evaluation.",
+        "owner": "Anmol Mishra",
+        "requirements": [
+            "parse key:value",
+            "validate schema"
+        ]
+    },
+    "score": 45,
+    "details": {
+        "valid": false,
+        "errors": [
+            "'title' is a required property"
+        ],
+        "priority": "medium"
+    },
+    "iteration": 1
+}

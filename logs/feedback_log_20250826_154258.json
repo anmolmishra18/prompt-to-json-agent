@@ -1,0 +1,44 @@
+[
+    {
+        "iteration": 1,
+        "spec": {
+            "description": "Organize old files in the archive folder; it\u2019s optional and can be done later.",
+            "priority": "low",
+            "title": "Organize old files in the arch",
+            "requirements": [
+                "minimal validation"
+            ]
+        },
+        "report_json": "reports\\report_iter1_20250826_154258.json",
+        "report_txt": "reports\\report_iter1_20250826_154258.txt"
+    },
+    {
+        "iteration": 2,
+        "spec": {
+            "description": "Organize old files in the archive folder; it\u2019s optional and can be done later.",
+            "priority": "low",
+            "title": "Organize Old Files In The Arch",
+            "requirements": [
+                "minimal validation"
+            ],
+            "owner": "Anmol Mishra"
+        },
+        "report_json": "reports\\report_iter2_20250826_154258.json",
+        "report_txt": "reports\\report_iter2_20250826_154258.txt"
+    },
+    {
+        "iteration": 3,
+        "spec": {
+            "description": "Organize old files in the archive folder; it\u2019s optional and can be done later.",
+            "priority": "low",
+            "title": "Organize Old Files In The Arch",
+            "requirements": [
+                "minimal validation"
+            ],
+            "owner": "Anmol Mishra",
+            "finalized": true
+        },
+        "report_json": "reports\\report_iter3_20250826_154258.json",
+        "report_txt": "reports\\report_iter3_20250826_154258.txt"
+    }
+]

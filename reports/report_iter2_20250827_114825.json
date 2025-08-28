@@ -1,0 +1,19 @@
+{
+    "spec": {
+        "priority": "medium",
+        "description": "\"Make a chatbot for exam queries\" \n",
+        "title": "\"Make a chatbot for exam queri",
+        "requirements": [
+            "basic validation",
+            "report generation"
+        ],
+        "owner": "Unknown"
+    },
+    "score": 75,
+    "details": {
+        "valid": true,
+        "errors": [],
+        "priority": "medium"
+    },
+    "iteration": 2
+}

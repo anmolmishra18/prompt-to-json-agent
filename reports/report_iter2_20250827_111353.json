@@ -1,0 +1,18 @@
+{
+  "generated_at": "20250827_111353",
+  "score": 40,
+  "details": {
+    "valid": false,
+    "errors": [
+      "'login, dashboard, reports' is not of type 'array'"
+    ],
+    "priority": "medium"
+  },
+  "spec": {
+    "title": "Student Portal",
+    "description": "Manage courses and grades\n\nPlease add more details about goal, input and expected output.",
+    "owner": "Anmol",
+    "requirements": "login, dashboard, reports",
+    "priority": "medium"
+  }
+}

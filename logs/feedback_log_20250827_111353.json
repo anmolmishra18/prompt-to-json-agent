@@ -1,0 +1,79 @@
+[
+    {
+        "iteration": 1,
+        "spec": {
+            "title": "Student Portal",
+            "description": "Manage courses and grades\n\nPlease add more details about goal, input and expected output.",
+            "owner": "Anmol",
+            "requirements": "login, dashboard, reports",
+            "priority": "medium"
+        },
+        "spec_before": {
+            "title": "Student Portal",
+            "description": "Manage courses and grades",
+            "owner": "Anmol",
+            "requirements": "login, dashboard, reports",
+            "priority": "medium"
+        },
+        "score": 30,
+        "details": {
+            "valid": false,
+            "errors": [
+                "'login, dashboard, reports' is not of type 'array'"
+            ],
+            "priority": "medium"
+        },
+        "suggestions": [
+            {
+                "type": "expand_description",
+                "value": "Please add more details about goal, input and expected output."
+            }
+        ],
+        "new_score": 40,
+        "new_details": {
+            "valid": false,
+            "errors": [
+                "'login, dashboard, reports' is not of type 'array'"
+            ],
+            "priority": "medium"
+        },
+        "report_json": "reports\\report_iter1_20250827_111353.json",
+        "report_txt": "reports\\report_iter1_20250827_111353.txt"
+    },
+    {
+        "iteration": 2,
+        "spec": {
+            "title": "Student Portal",
+            "description": "Manage courses and grades\n\nPlease add more details about goal, input and expected output.",
+            "owner": "Anmol",
+            "requirements": "login, dashboard, reports",
+            "priority": "medium"
+        },
+        "spec_before": {
+            "title": "Student Portal",
+            "description": "Manage courses and grades\n\nPlease add more details about goal, input and expected output.",
+            "owner": "Anmol",
+            "requirements": "login, dashboard, reports",
+            "priority": "medium"
+        },
+        "score": 40,
+        "details": {
+            "valid": false,
+            "errors": [
+                "'login, dashboard, reports' is not of type 'array'"
+            ],
+            "priority": "medium"
+        },
+        "suggestions": [],
+        "new_score": 40,
+        "new_details": {
+            "valid": false,
+            "errors": [
+                "'login, dashboard, reports' is not of type 'array'"
+            ],
+            "priority": "medium"
+        },
+        "report_json": "reports\\report_iter2_20250827_111353.json",
+        "report_txt": "reports\\report_iter2_20250827_111353.txt"
+    }
+]

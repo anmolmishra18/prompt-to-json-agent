@@ -1,0 +1,47 @@
+[
+    {
+        "iteration": 1,
+        "score": 75,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "Create a student management system for tracking grades and attendance",
+            "title": "Create a student management sy",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "suggestions": [
+            {
+                "field": "owner",
+                "action": "add",
+                "value": "Unknown"
+            }
+        ]
+    },
+    {
+        "iteration": 2,
+        "score": 85,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "Create a student management system for tracking grades and attendance",
+            "title": "Create a student management sy",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ],
+            "owner": "Unknown"
+        },
+        "suggestions": []
+    }
+]

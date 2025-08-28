@@ -1,0 +1,21 @@
+=== Report Iteration 2 ===
+Score: 75
+
+Details:
+{
+    "valid": true,
+    "errors": [],
+    "priority": "medium"
+}
+
+Spec:
+{
+    "priority": "medium",
+    "description": "\"Make a chatbot for exam queries\" \n",
+    "title": "\"Make a chatbot for exam queri",
+    "requirements": [
+        "basic validation",
+        "report generation"
+    ],
+    "owner": "Unknown"
+}

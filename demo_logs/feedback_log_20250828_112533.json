@@ -1,0 +1,47 @@
+[
+    {
+        "iteration": 1,
+        "score": 75,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "Create an emergency response system for hospitals with real-time alerts",
+            "title": "Create an emergency response s",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ]
+        },
+        "suggestions": [
+            {
+                "field": "owner",
+                "action": "add",
+                "value": "Unknown"
+            }
+        ]
+    },
+    {
+        "iteration": 2,
+        "score": 85,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "priority": "medium",
+            "description": "Create an emergency response system for hospitals with real-time alerts",
+            "title": "Create an emergency response s",
+            "requirements": [
+                "basic validation",
+                "report generation"
+            ],
+            "owner": "Unknown"
+        },
+        "suggestions": []
+    }
+]

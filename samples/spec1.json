@@ -1,0 +1,8 @@
+{
+    "description": "Create a prompt to JSON converter to map free text into keys used for evaluation.",
+    "owner": "Anmol Mishra",
+    "requirements": [
+        "parse key:value",
+        "validate schema"
+    ]
+}

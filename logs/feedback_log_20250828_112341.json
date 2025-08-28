@@ -1,0 +1,53 @@
+[
+    {
+        "iteration": 1,
+        "score": 45,
+        "details": {
+            "valid": false,
+            "errors": [
+                "'title' is a required property"
+            ],
+            "priority": "medium"
+        },
+        "spec": {
+            "description": "Create a prompt to JSON converter to map free text into keys used for evaluation.",
+            "owner": "Anmol Mishra",
+            "requirements": [
+                "parse key:value",
+                "validate schema"
+            ]
+        },
+        "suggestions": [
+            {
+                "field": "title",
+                "action": "add",
+                "value": "Untitled Project"
+            },
+            {
+                "field": "priority",
+                "action": "add",
+                "value": "medium"
+            }
+        ]
+    },
+    {
+        "iteration": 2,
+        "score": 85,
+        "details": {
+            "valid": true,
+            "errors": [],
+            "priority": "medium"
+        },
+        "spec": {
+            "description": "Create a prompt to JSON converter to map free text into keys used for evaluation.",
+            "owner": "Anmol Mishra",
+            "requirements": [
+                "parse key:value",
+                "validate schema"
+            ],
+            "title": "Untitled Project",
+            "priority": "medium"
+        },
+        "suggestions": []
+    }
+]

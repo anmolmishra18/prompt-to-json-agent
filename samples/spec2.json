@@ -1,0 +1,11 @@
+{
+    "title": "Prompt-to-JSON: Minimal Converter",
+    "description": "Convert human prompts into a structured JSON with fields title, description, owner, priority, requirements. This will be validated and scored.",
+    "owner": "Anmol Mishra",
+    "priority": "high",
+    "requirements": [
+        "parse key:value",
+        "support CSV-like lists",
+        "generate report"
+    ]
+}

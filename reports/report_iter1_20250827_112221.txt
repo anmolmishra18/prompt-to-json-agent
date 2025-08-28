@@ -1,0 +1,19 @@
+Report generated at: 20250827_112221
+Score: 65
+Priority: medium
+
+Details:
+- valid: True
+- errors: []
+- priority: medium
+
+Spec:
+{
+  "description": "\"Make a chatbot for exam queries\"",
+  "priority": "medium",
+  "title": "\"Make a chatbot for exam queri",
+  "requirements": [
+    "basic validation",
+    "report generation"
+  ]
+}

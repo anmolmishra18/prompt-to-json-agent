@@ -1,0 +1,18 @@
+{
+  "generated_at": "20250827_111546",
+  "score": 65,
+  "details": {
+    "valid": true,
+    "errors": [],
+    "priority": "medium"
+  },
+  "spec": {
+    "description": "Make a chatbot for exam queries",
+    "priority": "medium",
+    "title": "Make a chatbot for exam querie",
+    "requirements": [
+      "basic validation",
+      "report generation"
+    ]
+  }
+}
