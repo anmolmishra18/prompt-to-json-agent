@@ -1,0 +1,41 @@
+[
+  {
+    "iteration": 1,
+    "score": 20,
+    "spec": {
+      "priority": "Low",
+      "title": "Note-Taking App",
+      "description": "A simple app that stores and organizes text notes offline"
+    },
+    "suggestions": [
+      {
+        "field": "requirements",
+        "action": "add",
+        "value": [
+          "validation",
+          "reporting"
+        ]
+      },
+      {
+        "field": "owner",
+        "action": "add",
+        "value": "Unknown"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "score": 35,
+    "spec": {
+      "priority": "Low",
+      "title": "Note-Taking App",
+      "description": "A simple app that stores and organizes text notes offline",
+      "requirements": [
+        "validation",
+        "reporting"
+      ],
+      "owner": "Unknown"
+    },
+    "suggestions": []
+  }
+]

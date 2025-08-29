@@ -1,11 +1,13 @@
 {
-    "title": "Prompt-to-JSON: Minimal Converter",
-    "description": "Convert human prompts into a structured JSON with fields title, description, owner, priority, requirements. This will be validated and scored.",
-    "owner": "Anmol Mishra",
+    "title": "E-commerce Platform",
+    "description": "A comprehensive e-commerce platform with product catalog, shopping cart, and payment processing",
+    "owner": "Development Team",
     "priority": "high",
     "requirements": [
-        "parse key:value",
-        "support CSV-like lists",
-        "generate report"
+        "user authentication",
+        "product management",
+        "order processing",
+        "payment integration",
+        "inventory tracking"
     ]
 }

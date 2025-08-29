@@ -1,0 +1,16 @@
+=== Report Iteration 1 ===
+Score: 10
+
+Details:
+{
+  "valid": false,
+  "errors": [
+    "'description' is a required property"
+  ]
+}
+
+Spec:
+{
+  "priority": "medium",
+  "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High"
+}

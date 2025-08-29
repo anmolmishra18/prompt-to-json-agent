@@ -1,0 +1,15 @@
+{
+  "spec": {
+    "priority": "Low",
+    "title": "Note-Taking App",
+    "description": "A simple app that stores and organizes text notes offline"
+  },
+  "score": 20,
+  "details": {
+    "valid": false,
+    "errors": [
+      "'Low' is not one of ['low', 'medium', 'high']"
+    ]
+  },
+  "iteration": 1
+}

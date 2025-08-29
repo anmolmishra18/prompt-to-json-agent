@@ -1,0 +1,14 @@
+{
+  "spec": {
+    "priority": "medium",
+    "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High"
+  },
+  "score": 10,
+  "details": {
+    "valid": false,
+    "errors": [
+      "'description' is a required property"
+    ]
+  },
+  "iteration": 1
+}

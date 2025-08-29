@@ -1,0 +1,45 @@
+[
+  {
+    "iteration": 1,
+    "score": 10,
+    "spec": {
+      "priority": "medium",
+      "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High"
+    },
+    "suggestions": [
+      {
+        "field": "description",
+        "action": "expand",
+        "value": " - Enhanced with more details"
+      },
+      {
+        "field": "requirements",
+        "action": "add",
+        "value": [
+          "validation",
+          "reporting"
+        ]
+      },
+      {
+        "field": "owner",
+        "action": "add",
+        "value": "Unknown"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "score": 75,
+    "spec": {
+      "priority": "medium",
+      "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High",
+      "description": " - Enhanced with more details",
+      "requirements": [
+        "reporting",
+        "validation"
+      ],
+      "owner": "Unknown"
+    },
+    "suggestions": []
+  }
+]

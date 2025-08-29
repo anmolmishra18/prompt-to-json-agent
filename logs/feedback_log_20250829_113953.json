@@ -1,0 +1,37 @@
+[
+  {
+    "iteration": 1,
+    "score": 75,
+    "spec": {
+      "priority": "medium",
+      "description": "Design a robot assistant that manages home chores and has a charging dock",
+      "title": "Design a robot assistant that ",
+      "requirements": [
+        "basic validation",
+        "report generation"
+      ]
+    },
+    "suggestions": [
+      {
+        "field": "owner",
+        "action": "add",
+        "value": "Unknown"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "score": 85,
+    "spec": {
+      "priority": "medium",
+      "description": "Design a robot assistant that manages home chores and has a charging dock",
+      "title": "Design a robot assistant that ",
+      "requirements": [
+        "basic validation",
+        "report generation"
+      ],
+      "owner": "Unknown"
+    },
+    "suggestions": []
+  }
+]

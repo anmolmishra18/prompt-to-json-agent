@@ -1,0 +1,47 @@
+[
+  {
+    "iteration": 1,
+    "score": 20,
+    "spec": {
+      "priority": "High\"",
+      "\"title": "Smart Home Robot",
+      "description": "A robot assistant that manages cooking, cleaning, and charging itself with an automatic dock"
+    },
+    "suggestions": [
+      {
+        "field": "title",
+        "action": "add",
+        "value": "Untitled Project"
+      },
+      {
+        "field": "requirements",
+        "action": "add",
+        "value": [
+          "validation",
+          "reporting"
+        ]
+      },
+      {
+        "field": "owner",
+        "action": "add",
+        "value": "Unknown"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "score": 35,
+    "spec": {
+      "priority": "High\"",
+      "\"title": "Smart Home Robot",
+      "description": "A robot assistant that manages cooking, cleaning, and charging itself with an automatic dock",
+      "title": "Untitled Project",
+      "requirements": [
+        "reporting",
+        "validation"
+      ],
+      "owner": "Unknown"
+    },
+    "suggestions": []
+  }
+]

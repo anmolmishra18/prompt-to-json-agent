@@ -1,0 +1,10 @@
+{
+    "title": "Task Management System",
+    "description": "A collaborative task management system for teams",
+    "priority": "medium",
+    "requirements": [
+        "task creation",
+        "team collaboration",
+        "deadline tracking"
+    ]
+}

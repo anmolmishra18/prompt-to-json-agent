@@ -1,0 +1,18 @@
+{
+  "spec": {
+    "priority": "medium",
+    "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High",
+    "description": " - Enhanced with more details",
+    "requirements": [
+      "reporting",
+      "validation"
+    ],
+    "owner": "Unknown"
+  },
+  "score": 75,
+  "details": {
+    "valid": true,
+    "errors": []
+  },
+  "iteration": 2
+}

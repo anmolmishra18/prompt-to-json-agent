@@ -1,0 +1,17 @@
+=== Report Iteration 1 ===
+Score: 20
+
+Details:
+{
+  "valid": false,
+  "errors": [
+    "'Low' is not one of ['low', 'medium', 'high']"
+  ]
+}
+
+Spec:
+{
+  "priority": "Low",
+  "title": "Note-Taking App",
+  "description": "A simple app that stores and organizes text notes offline"
+}

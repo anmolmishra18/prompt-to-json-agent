@@ -1,0 +1,37 @@
+[
+  {
+    "iteration": 1,
+    "score": 75,
+    "spec": {
+      "priority": "medium",
+      "description": "\"Build a chatbot for customer support. Priority: High\"",
+      "title": "\"Build a chatbot for customer ",
+      "requirements": [
+        "basic validation",
+        "report generation"
+      ]
+    },
+    "suggestions": [
+      {
+        "field": "owner",
+        "action": "add",
+        "value": "Unknown"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "score": 85,
+    "spec": {
+      "priority": "medium",
+      "description": "\"Build a chatbot for customer support. Priority: High\"",
+      "title": "\"Build a chatbot for customer ",
+      "requirements": [
+        "basic validation",
+        "report generation"
+      ],
+      "owner": "Unknown"
+    },
+    "suggestions": []
+  }
+]

@@ -14,19 +14,28 @@ def timestamp():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
 
 def parse_prompt(prompt):
-    spec = {"priority": "medium"}
-    if "title:" in prompt.lower():
-        for part in prompt.split(";"):
-            if ":" in part:
-                key, val = part.split(":", 1)
-                spec[key.strip().lower()] = val.strip()
-    else:
-        spec["description"] = prompt
-        spec["title"] = prompt[:30]
-        spec["requirements"] = ["basic validation", "report generation"]
+    import re
+    spec = {}
     
-    if isinstance(spec.get("requirements"), str):
-        spec["requirements"] = [r.strip() for r in spec["requirements"].split(",")]
+    # Look for Priority: value pattern
+    priority_match = re.search(r'priority:\s*(\w+)', prompt, re.IGNORECASE)
+    if priority_match:
+        spec["priority"] = priority_match.group(1).lower()
+        prompt = re.sub(r'priority:\s*\w+\.?', '', prompt, flags=re.IGNORECASE).strip()
+    else:
+        spec["priority"] = "medium"
+    
+    # Look for Title: value pattern
+    title_match = re.search(r'title:\s*([^;.]+)', prompt, re.IGNORECASE)
+    if title_match:
+        spec["title"] = title_match.group(1).strip()
+        prompt = re.sub(r'title:\s*[^;.]+[;.]?', '', prompt, flags=re.IGNORECASE).strip()
+    else:
+        spec["title"] = prompt[:30].strip()
+    
+    # Use remaining text as description
+    spec["description"] = prompt.strip()
+    spec["requirements"] = ["basic validation", "report generation"]
     
     return spec
 
@@ -81,30 +90,38 @@ def append_daily_log(honesty, discipline, gratitude, integrity=None):
         f.write(f"Gratitude: {gratitude}\n\n")
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--prompt", type=str, help="Prompt text")
-    parser.add_argument("--sample", type=str, help="Sample JSON file path")
-    parser.add_argument("--iterations", type=int, default=3, help="Number of iterations")
+    parser = argparse.ArgumentParser(description="Prompt-to-JSON Agent with RL feedback")
+    parser.add_argument("--prompt", type=str, help="Prompt text to convert to JSON")
+    parser.add_argument("--sample", type=str, help="Sample JSON file path to process")
+    parser.add_argument("--iterations", type=int, default=3, help="Number of RL iterations (1-10)")
     args = parser.parse_args()
     
-    if args.sample:
-        with open(args.sample, "r") as f:
-            spec = json.load(f)
-    elif args.prompt:
-        spec = parse_prompt(args.prompt)
-    else:
-        print("Provide --prompt or --sample")
-        return
-    
-    final_spec, history = run_pipeline(spec, args.iterations)
-    
-    # Daily log entry
-    append_daily_log(
-        honesty="Tested pipeline with prompt parsing, evaluation, and feedback loop working",
-        discipline="Completed all 4 days with working CLI and proper structure",
-        gratitude="Grateful for completing Task 3 requirements successfully",
-        integrity="Honest implementation following exact specifications"
-    )
+    try:
+        if args.sample:
+            if not os.path.exists(args.sample):
+                print(f"Error: File '{args.sample}' not found")
+                return
+            with open(args.sample, "r") as f:
+                spec = json.load(f)
+        elif args.prompt:
+            spec = parse_prompt(args.prompt)
+        else:
+            print("Error: Provide --prompt 'text' or --sample path/to/file.json")
+            print("Examples:")
+            print("  python main.py --prompt 'Create a student management system'")
+            print("  python main.py --sample samples/spec1.json --iterations 2")
+            return
+        
+        if args.iterations < 1 or args.iterations > 10:
+            print("Error: Iterations must be between 1-10")
+            return
+            
+        final_spec, history = run_pipeline(spec, args.iterations)
+        
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in file - {e}")
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

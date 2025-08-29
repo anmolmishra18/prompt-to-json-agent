@@ -1,0 +1,23 @@
+=== Report Iteration 2 ===
+Score: 35
+
+Details:
+{
+  "valid": false,
+  "errors": [
+    "'High\"' is not one of ['low', 'medium', 'high']"
+  ]
+}
+
+Spec:
+{
+  "priority": "High\"",
+  "\"title": "Smart Home Robot",
+  "description": "A robot assistant that manages cooking, cleaning, and charging itself with an automatic dock",
+  "title": "Untitled Project",
+  "requirements": [
+    "reporting",
+    "validation"
+  ],
+  "owner": "Unknown"
+}

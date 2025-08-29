@@ -1,0 +1,20 @@
+=== Report Iteration 2 ===
+Score: 75
+
+Details:
+{
+  "valid": true,
+  "errors": []
+}
+
+Spec:
+{
+  "priority": "high",
+  "title": "Build a chatbot for customer s",
+  "description": "Build a chatbot for customer support.",
+  "requirements": [
+    "basic validation",
+    "report generation"
+  ],
+  "owner": "Unknown"
+}

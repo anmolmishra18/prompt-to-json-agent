@@ -1,0 +1,18 @@
+{
+  "spec": {
+    "priority": "medium",
+    "description": "Design a robot assistant that manages home chores and has a charging dock",
+    "title": "Design a robot assistant that ",
+    "requirements": [
+      "basic validation",
+      "report generation"
+    ],
+    "owner": "Unknown"
+  },
+  "score": 85,
+  "details": {
+    "valid": true,
+    "errors": []
+  },
+  "iteration": 2
+}

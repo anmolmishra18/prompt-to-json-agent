@@ -1,0 +1,18 @@
+{
+  "spec": {
+    "priority": "high",
+    "title": "Build a chatbot for customer s",
+    "description": "Build a chatbot for customer support.",
+    "requirements": [
+      "basic validation",
+      "report generation"
+    ],
+    "owner": "Unknown"
+  },
+  "score": 75,
+  "details": {
+    "valid": true,
+    "errors": []
+  },
+  "iteration": 2
+}

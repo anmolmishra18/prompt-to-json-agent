@@ -1,0 +1,15 @@
+{
+  "spec": {
+    "priority": "High",
+    "title": "Smart Home Robot",
+    "description": "A robot assistant that manages cooking, cleaning, and charging itself with an automatic dock"
+  },
+  "score": 20,
+  "details": {
+    "valid": false,
+    "errors": [
+      "'High' is not one of ['low', 'medium', 'high']"
+    ]
+  },
+  "iteration": 1
+}

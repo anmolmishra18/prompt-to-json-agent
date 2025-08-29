@@ -1,0 +1,20 @@
+=== Report Iteration 2 ===
+Score: 75
+
+Details:
+{
+  "valid": true,
+  "errors": []
+}
+
+Spec:
+{
+  "priority": "medium",
+  "title": "AI Health Assistant\nDescription: A virtual assistant that tracks daily calorie intake, monitors activity, and gives health tips.\nPriority: High",
+  "description": " - Enhanced with more details",
+  "requirements": [
+    "reporting",
+    "validation"
+  ],
+  "owner": "Unknown"
+}

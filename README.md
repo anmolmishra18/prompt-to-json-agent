@@ -14,13 +14,28 @@ pip install -r requirements.txt
 
 ### CLI
 ```bash
+# Process a prompt
 python main.py --prompt "Create a student management system" --iterations 3
+
+# Process existing JSON
 python main.py --sample samples/spec1.json --iterations 2
+
+# Quick demo
+python demo.py
 ```
 
 ### Web App
 ```bash
 streamlit run app.py
+```
+
+### Examples
+```bash
+# Simple prompt
+python main.py --prompt "Build an API for task management"
+
+# Complex prompt with metadata
+python main.py --prompt "title: E-commerce; description: Online store with payments; priority: high"
 ```
 
 ## Project Structure
@@ -33,7 +48,7 @@ prompt-to-json-agent/
 │   ├── criteria.py      # Schema validation & scoring
 │   ├── feedback.py      # Feedback generation & application
 │   └── report.py        # Report generation
-├── samples/             # Sample JSON specifications
+├── samples/             # Sample JSON specifications (3+ files)
 ├── reports/             # Generated reports + daily_log.txt
 ├── logs/                # Feedback history logs
 └── requirements.txt     # Dependencies
